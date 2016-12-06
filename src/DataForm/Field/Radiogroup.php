@@ -48,7 +48,10 @@ class Radiogroup extends Field
 
                 foreach ($this->options as $val => $label) {
                     $this->checked = (!is_null($this->value) and ($this->value == $val));
-                    $output .= Form::radio($this->name, $val, $this->checked).' '. $label. $this->separator;
+                    //radio 增大选择区域
+                    $output .= Form::radio($this->name, $val, $this->checked,
+                            ['id' => md5($this->name . $val)]) . ' ' .
+                            \Form::label(md5($this->name . $val), $label) . $this->separator;
                 }
                 $output = '<div>'.$output.'</div>'.$this->extra_output;
                 break;
